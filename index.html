@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Policy App - Home</title>
+<script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+<header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto flex justify-between items-center p-4 md:p-6">
+    <a href="#" class="flex items-center space-x-2 text-blue-700 font-extrabold text-2xl select-none" aria-label="Homepage logo and branding">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor" class="w-10 h-10">
+        <circle cx="32" cy="32" r="30" stroke="#2563eb" stroke-width="4" fill="none"/>
+        <image x="25" y="25" width="50" height="50" href="your-logo.png" clip-path="circle(25px at center)" style="border-radius: 50%;" />
+
+      </svg>
+      <span>Policy</span>
+    </a>
+
+    <nav class="hidden md:flex items-center space-x-4">
+      <button id="talkExpertBtn" aria-label="Talk to Expert" class="flex items-center space-x-2 border border-blue-600 text-blue-600 rounded-md py-2 px-4 hover:bg-blue-600 hover:text-white transition-colors duration-300 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v9l-4-4H7a2 2 0 01-2-2V6a2 2 0 012-2h6" /></svg>
+        <span>Talk to Expert</span>
+      </button>
+      <button id="loginBtn" class="border border-blue-600 text-blue-600 rounded-md py-2 px-4 hover:bg-blue-600 hover:text-white transition-colors duration-300 focus:outline-none">Sign In</button>
+      <img id="profileImg" class="profile-img hidden cursor-pointer" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73f41455-8bf7-45c8-af05-bc99a25f823f.png" alt="User profile picture" tabindex="0" />
+    </nav>
+
+    <!-- Mobile menu -->
+    <button id="mobileMenuBtn" aria-label="Toggle navigation menu" class="md:hidden hamburger focus:outline-none" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md px-4 pb-4">
+    <button id="mobileTalkBtn" aria-label="Talk to Expert" class="flex items-center w-full justify-center space-x-2 border border-blue-600 text-blue-600 rounded-md py-2 px-4 my-2 hover:bg-blue-600 hover:text-white transition-colors duration-300 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v9l-4-4H7a2 2 0 01-2-2V6a2 2 0 012-2h6" /></svg>
+      <span>Talk to Expert</span>
+    </button>
+    <button id="mobileLoginBtn" class="w-full border border-blue-600 text-blue-600 rounded-md py-2 px-4 my-2 hover:bg-blue-600 hover:text-white transition-colors duration-300 focus:outline-none">Sign In</button>
+    <img id="mobileProfileImg" class="profile-img hidden mx-auto mt-2" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9cc49e9a-d90d-4844-8f76-27cd43a80ac9.png" alt="User profile picture" tabindex="0" />
+  </div>
+</header>
+
+<main class="flex-grow pt-20">
+
+  <!-- Hero Section with scrolling images -->
+  <section aria-label="Hero section with continuous scrolling images" class="hero-container relative h-48 md:h-64 lg:h-80 overflow-hidden bg-gradient-to-r from-blue-50 to-white shadow-inner mb-10">
+    <div class="hero-scroll">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ff07902b-5e62-47a6-8aa2-5eeffd25e35a.png" alt="Secure insurance plans illustrated by shield, family and safety icons in blue tone" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/260ee656-fcb1-4cb8-86c5-e322535b3f6e.png" alt="Trusted insurance service with millions of satisfied customers, featuring happy people icons in blue background" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5e00f39f-0b99-4e93-8916-91704a1470fa.png" alt="Affordable insurance premiums showcasing coins and money saving icons in a light blue background" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/77032455-644f-471e-96f7-23c44e52bf72.png" alt="Easy insurance claims process visualized by paperwork and checkmark icons in blue tones" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7f1e4f6f-8bf7-44ab-b26c-dbcaa047c42c.png" alt="24/7 insurance support illustrated by customer service icons with headset in blue background" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+
+      <!-- Repeat these images for continuous loop effect -->
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c64aafb5-6669-4c58-9620-54c5bd245992.png" alt="Secure insurance plans illustrated by shield, family and safety icons in blue tone" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5b903609-9042-4e03-aade-798d570a8ced.png" alt="Trusted insurance service with millions of satisfied customers, featuring happy people icons in blue background" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b704bde3-5fb5-47da-94e6-b01b6b371057.png" alt="Affordable insurance premiums showcasing coins and money saving icons in a light blue background" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3908619b-4762-45bc-9966-8a277be0407e.png" alt="Easy insurance claims process visualized by paperwork and checkmark icons in blue tones" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/94753ea1-16f6-4c48-acb2-ce3698ffc49b.png" alt="24/7 insurance support illustrated by customer service icons with headset in blue background" class="w-80 h-full object-cover" onerror="this.style.display='none'" />
+    </div>
+  </section>
+
+  <!-- Four Main Sections with Images -->
+  <section aria-label="Main feature sections" class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+    <a href="/dashboard" class="group bg-white rounded-lg shadow-lg flex flex-col items-center p-6 hover:shadow-xl transition-shadow duration-300" tabindex="0" aria-label="Go to Dashboard page">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/33c88986-b7a5-4f67-9795-96d0269e41a3.png" alt="Dashboard icon representing reports and analytics displayed on a screen" class="w-32 h-32 mb-4 object-contain rounded" onerror="this.style.display='none'" />
+      <h3 class="text-xl font-semibold text-blue-700 group-hover:text-blue-900">Dashboard</h3>
+    </a>
+    <a href="/buy-policy" class="group bg-white rounded-lg shadow-lg flex flex-col items-center p-6 hover:shadow-xl transition-shadow duration-300" tabindex="0" aria-label="Go to Buy Policy page">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/15177355-1789-48d6-8711-1b609a62640e.png" alt="Buy policy icon depicting a shopping cart and insurance document" class="w-32 h-32 mb-4 object-contain rounded" onerror="this.style.display='none'" />
+      <h3 class="text-xl font-semibold text-blue-700 group-hover:text-blue-900">Buy Policy</h3>
+    </a>
+    <a href="/claim-policy" class="group bg-white rounded-lg shadow-lg flex flex-col items-center p-6 hover:shadow-xl transition-shadow duration-300" tabindex="0" aria-label="Go to Claim Policy page">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dce0c4c5-bff3-4ff0-ab6b-392d8a2cbdb5.png" alt="Claim policy icon illustrating a hand giving money or reimbursement" class="w-32 h-32 mb-4 object-contain rounded" onerror="this.style.display='none'" />
+      <h3 class="text-xl font-semibold text-blue-700 group-hover:text-blue-900">Claim Policy</h3>
+    </a>
+    <a href="/guidelines" class="group bg-white rounded-lg shadow-lg flex flex-col items-center p-6 hover:shadow-xl transition-shadow duration-300" tabindex="0" aria-label="Go to Guidelines page">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/269b8f01-b926-4efa-8722-dc437f885fa5.png" alt="Guidelines icon showing a checklist with a pen and notes" class="w-32 h-32 mb-4 object-contain rounded" onerror="this.style.display='none'" />
+      <h3 class="text-xl font-semibold text-blue-700 group-hover:text-blue-900">Guidelines</h3>
+    </a>
+  </section>
+
+  <!-- Help Section with Live Video or Text Chat -->
+  <section aria-label="Help and Support" class="max-w-7xl mx-auto px-4 md:px-8 mb-20 bg-white rounded-lg shadow-lg p-6 md:p-10">
+    <h2 class="text-3xl font-bold text-blue-900 mb-6 text-center">Need Help?</h2>
+    <p class="text-center text-gray-700 mb-8 max-w-xl mx-auto">Connect with our support team instantly through live video chat or text chat for personalized assistance with your policies.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-6">
+      <button id="videoChatBtn" class="chat-btn inline-flex items-center justify-center space-x-2 px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-md font-semibold shadow-md hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-3.5l4 4v-11l-4 4z"/></svg>
+        <span>Live Video Chat</span>
+      </button>
+      <button id="textChatBtn" class="chat-btn inline-flex items-center justify-center space-x-2 px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-md font-semibold shadow-md hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-6l-4 4v-4H7a2 2 0 01-2-2v-2a2 2 0 012-2h2"/></svg>
+        <span>Text Chat</span>
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="bg-white border-t border-gray-300 py-8 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-gray-600 text-sm">
+    <div>
+      <h4 class="font-semibold text-blue-800 mb-2">Policy App</h4>
+      <p>Your trusted partner for insurance solutions, helping you secure your future with ease and confidence.</p>
+    </div>
+    <div>
+      <h4 class="font-semibold text-blue-800 mb-2">Quick Links</h4>
+      <ul>
+        <li><a href="/about" class="hover:underline focus:underline">About Us</a></li>
+        <li><a href="/contact" class="hover:underline focus:underline">Contact</a></li>
+        <li><a href="/terms" class="hover:underline focus:underline">Terms of Service</a></li>
+        <li><a href="/privacy" class="hover:underline focus:underline">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-semibold text-blue-800 mb-2">Connect with Us</h4>
+      <p>Email: support@policyapp.com</p>
+      <p>Phone: +1 (800) 123-4567</p>
+      <p>© 2024 Policy App, Inc. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+ <script src="home.js"></script>
+</body>
+</html>
+
