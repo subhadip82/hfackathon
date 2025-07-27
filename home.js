@@ -53,13 +53,13 @@
   */
 
   // Talk to expert buttons click event demo
-  const talkExpertBtns = [document.getElementById('talkExpertBtn'), document.getElementById('mobileTalkBtn')];
-  talkExpertBtns.forEach(btn => {
-    btn?.addEventListener('click', () => {
-      alert('Connecting you to an expert...');
-      // Here could be implementation for remote chat or call
-    });
-  });
+  // const talkExpertBtns = [document.getElementById('talkExpertBtn'), document.getElementById('mobileTalkBtn')];
+  // talkExpertBtns.forEach(btn => {
+  //   btn?.addEventListener('click', () => {
+  //     alert('Connecting you to an expert...');
+  //     // Here could be implementation for remote chat or call
+  //   });
+  // });
 
   // Help section chat buttons (show alerts simulating the feature)
   const videoChatBtn = document.getElementById('videoChatBtn');
@@ -109,14 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-
-
-
 // home.js
 
 // Redirect Sign In button (desktop)
@@ -128,3 +120,72 @@ document.getElementById("loginBtn").addEventListener("click", () => {
 document.getElementById("mobileLoginBtn").addEventListener("click", () => {
   window.location.href = "singin.html";
 });
+
+
+// Elements
+const chatBox = document.getElementById('chatBox');
+const closeChatBtn = document.getElementById('closeChatBtn');
+const sendChatBtn = document.getElementById('sendChatBtn');
+const chatInput = document.getElementById('chatInput');
+const chatMessages = document.getElementById('chatMessages');
+
+// Open/Close Chat
+const talkExpertBtns = [document.getElementById('talkExpertBtn'), document.getElementById('mobileTalkBtn')];
+talkExpertBtns.forEach(btn => {
+  btn?.addEventListener('click', () => chatBox.classList.remove('hidden'));
+});
+closeChatBtn.addEventListener('click', () => chatBox.classList.add('hidden'));
+
+// Predefined Response Logic
+function getFixedResponse(message) {
+  const msg = message.toLowerCase();
+
+  if (msg.includes('buy policy')) {
+    return "To buy a policy, go to the 'Buy Policy' section, select your plan, and complete the payment process.";
+  } else if (msg.includes('claim policy')) {
+    return "To claim a policy, go to the 'Claim Policy' page and fill out the claim form with your policy number and details.";
+  } else if (msg.includes('policy status')) {
+    return "You can view your policy status under the 'Dashboard' after signing in.";
+  } else if (msg.includes('contact') || msg.includes('support')) {
+    return "You can reach our support team 24/7 via the 'Live Chat' or by emailing support@policyapp.com.";
+  } else if (msg.includes('guideline')) {
+    return "You can read all insurance guidelines under the 'Guideline' section on the homepage.";
+  } else if (msg.includes('profile') || msg.includes('update details')) {
+    return "To update your profile, go to the 'Profile' section after login and click 'Edit Details'.";
+  } else {
+    return "Thank you for your message. Our expert will reply shortly or visit the FAQ page for quick help.";
+  }
+}
+
+// Send Message
+sendChatBtn.addEventListener('click', () => {
+  const message = chatInput.value.trim();
+  if (message !== '') {
+    // Show user message
+    const userMsg = document.createElement('p');
+    userMsg.className = 'text-right text-blue-700';
+    userMsg.textContent = `You: ${message}`;
+    chatMessages.appendChild(userMsg);
+    chatInput.value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Typing effect
+    const loadingMsg = document.createElement('p');
+    loadingMsg.className = 'text-left text-gray-600 italic';
+    loadingMsg.textContent = `Expert is typing...`;
+    chatMessages.appendChild(loadingMsg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Simulate delay and reply
+    setTimeout(() => {
+      loadingMsg.remove();
+      const replyText = getFixedResponse(message);
+      const reply = document.createElement('p');
+      reply.className = 'text-left text-gray-600';
+      reply.textContent = `Expert: ${replyText}`;
+      chatMessages.appendChild(reply);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+  }
+});
+

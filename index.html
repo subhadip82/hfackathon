@@ -138,7 +138,26 @@
   </div>
 </footer>
 
+ <!-- Chat Box -->
+<div id="chatBox" class="fixed bottom-20 right-4 w-80 bg-white border border-gray-300 rounded-lg shadow-lg hidden z-50">
+  <div class="bg-blue-600 text-white px-4 py-2 rounded-t-lg flex justify-between items-center">
+    <h4 class="font-semibold">Expert Chat</h4>
+    <button id="closeChatBtn" class="text-white text-lg font-bold">&times;</button>
+  </div>
+  <div class="p-3 h-64 overflow-y-auto space-y-2 text-sm" id="chatMessages">
+    <p class="text-gray-600">👋 Hello! How can we assist you today?</p>
+  </div>
+  <div class="flex border-t border-gray-300">
+    <input type="text" id="chatInput" placeholder="Type your message..." class="flex-grow p-2 text-sm focus:outline-none" />
+    <button id="sendChatBtn" class="bg-blue-600 text-white px-4">Send</button>
+  </div>
+</div>
  <script src="home.js"></script>
+
+
+
+
+
 
 </body>
 </html>

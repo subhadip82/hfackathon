@@ -83,3 +83,6 @@ body{
 #mobileMenu {
   transition: all 0.3s ease-in-out;
 }
+#chatBox {
+  max-height: 400px;
+}
