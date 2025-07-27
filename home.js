@@ -1,12 +1,25 @@
-// Mobile menu toggle
+
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
-  mobileMenuBtn.addEventListener('click', () => {
-    const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
     mobileMenuBtn.setAttribute('aria-expanded', !expanded);
     mobileMenu.classList.toggle('hidden');
     mobileMenuBtn.classList.toggle('active');
   });
+// Mobile menu toggle logic
+   document.addEventListener('DOMContentLoaded', function() {
+     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+     const mobileMenu = document.getElementById('mobileMenu');
+     mobileMenuBtn.addEventListener('click', function() {
+       mobileMenu.classList.toggle('hidden');
+       // Update aria-expanded for accessibility
+       const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+       mobileMenuBtn.setAttribute('aria-expanded', !expanded);
+     });
+   });
+
 
   // Login simulation and UI update
   const loginBtn = document.getElementById('loginBtn');
@@ -113,5 +126,5 @@ document.getElementById("loginBtn").addEventListener("click", () => {
 
 // Redirect Sign In button (mobile)
 document.getElementById("mobileLoginBtn").addEventListener("click", () => {
-  window.location.href = "D:\\hackthon\\singinpage\\singin.html";
+  window.location.href = "singin.html";
 });
