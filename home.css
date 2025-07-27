@@ -1,4 +1,9 @@
-
+body{
+   background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWaW52xb9cEelkc4X0W_uEKRoFNZfA2xGfSg&s') no-repeat center center/cover;
+  
+}
+  
+  
   /* Custom animations for hero images */
   .hero-scroll {
     display: flex;
