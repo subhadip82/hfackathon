@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Claim policy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #e0c3fc, #8ec5fc, #c9d6ff, #fcb69f);
+      background-size: 400% 400%;
+      animation: gradientBG 18s ease infinite;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .fade-slide {
+      animation: fadeSlide 0.8s ease-in-out;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card {
+      transition: all 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center py-12 px-4">
+
+  <div class="max-w-5xl w-full space-y-10">
+
+    <!-- Header -->
+    <div class="text-center fade-slide">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Claim Icon" class="w-20 mx-auto mb-4 animate-bounce">
+      <h1 class="text-4xl font-extrabold text-indigo-900">TechTaitans Claim Policy Portal</h1>
+      <p class="text-gray-700 mt-2">Submit your claim securely — powered by AI.</p>
+    </div>
+
+    <!-- Claim Form -->
+    <form id="claimForm" class="glass p-6 rounded-3xl shadow-2xl fade-slide card">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input id="name" type="text" placeholder="Full Name" required class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-400">
+        <input id="dob" type="date" required class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-400">
+        <input id="email" type="email" placeholder="Email" required class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-400">
+        <input id="phone" type="tel" placeholder="Phone Number" required class="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-400">
+        <input id="address" type="text" placeholder="Full Address" required class="p-3 rounded-xl border border-gray-300 col-span-full focus:ring-2 focus:ring-indigo-400">
+        <input id="idProof" type="text" placeholder="ID Proof Number" required class="p-3 rounded-xl border border-gray-300 col-span-full focus:ring-2 focus:ring-indigo-400">
+        <input id="fileUpload" type="file" accept=".jpg,.jpeg,.png,.pdf" required class="p-3 rounded-xl border border-gray-300 col-span-full bg-white">
+      </div>
+      <button type="submit" class="w-full mt-6 bg-indigo-700 text-white py-3 rounded-xl text-lg font-semibold hover:bg-indigo-800 transition">
+        Submit Claim
+      </button>
+    </form>
+
+    <!-- Claim Review Box -->
+    <div id="claimDetails" class="hidden glass p-6 rounded-3xl shadow-2xl fade-slide card">
+      <div class="flex items-center gap-4 mb-4">
+        <img src="https://cdn-icons-png.flaticon.com/512/3500/3500833.png" class="w-14 h-14" />
+        <div>
+          <h2 class="text-2xl font-bold text-green-700">Claim Submitted</h2>
+          <p class="text-sm text-gray-600">Analyzing with LLM AI...</p>
+        </div>
+      </div>
+      <div class="space-y-2 text-gray-800 text-md">
+        <p><strong>Name:</strong> <span id="resName"></span></p>
+        <p><strong>Policy Number:</strong> <span id="resIdProof"></span></p>
+        <p><strong>Policy Name:</strong> <span id="resPolicyName"></span></p>
+        <p><strong>Amount Paid by Company:</strong> ₹<span id="resClaimAmount"></span></p>
+        <p><strong>DOB:</strong> <span id="resDOB"></span></p>
+        <p><strong>Phone:</strong> <span id="resPhone"></span></p>
+        <p><strong>Email:</strong> <span id="resEmail"></span></p>
+        <p><strong>Address:</strong> <span id="resAddress"></span></p>
+        <p><strong>Status:</strong> <span id="resStatus" class="text-yellow-700 font-semibold">Processing via LLM...</span></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script>
+    const form = document.getElementById('claimForm');
+    const resultBox = document.getElementById('claimDetails');
+
+    const policyNames = [
+      "SecureLife Plan", "Smart Health Shield", "Future Protect Plus",
+      "Golden Care Policy", "UltraSafe Insurance", "MaxCover Advantage",
+      "Platinum Term Plan", "Wealth Guard Pro", "HealthBoost Premium", "SecureNow Flex"
+    ];
+
+    function getRandomPolicyName() {
+      return policyNames[Math.floor(Math.random() * policyNames.length)];
+    }
+  // here llm model are add 
+    function getRandomPolicyNumber() {
+      return "POL" + Math.floor(Math.random() * 900000 + 100000);
+    }
+
+
+    // llm  mode are add here 
+    function getRandomAmount() {
+      return Math.floor(Math.random() * 50000 + 10000); // ₹10,000 – ₹60,000
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get values
+      const name = document.getElementById('name').value;
+      const dob = document.getElementById('dob').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+
+      // Generate AI-based data
+      const policyName = getRandomPolicyName();
+      const policyNumber = getRandomPolicyNumber();
+      const claimAmount = getRandomAmount();
+
+      // Hide form
+      form.style.display = "none";
+
+      // Fill result box
+      document.getElementById('resName').textContent = name;
+      document.getElementById('resDOB').textContent = dob;
+      document.getElementById('resEmail').textContent = email;
+      document.getElementById('resPhone').textContent = phone;
+      document.getElementById('resAddress').textContent = address;
+      document.getElementById('resIdProof').textContent = policyNumber;
+      document.getElementById('resPolicyName').textContent = policyName;
+      document.getElementById('resClaimAmount').textContent = claimAmount;
+
+      // Show result
+      resultBox.classList.remove('hidden');
+
+      // Simulate LLM AI processing
+      setTimeout(() => {
+        document.getElementById('resStatus').textContent = `✅ Approved — ₹${claimAmount} will be credited soon.`;
+        document.getElementById('resStatus').classList.replace('text-yellow-700', 'text-green-700');
+      }, 6000);
+    });
+  </script>
+
+</body>
+</html>
