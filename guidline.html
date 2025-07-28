@@ -13,8 +13,32 @@
       background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
     }
     .question-box:hover {
-      transform: scale(1.02);
+      transform: scale(1.01);
       transition: all 0.3s ease-in-out;
+    }
+    .accordion-content {
+      display: none;
+    }
+    .accordion-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    #chatBox {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
     }
   </style>
 </head>
@@ -23,6 +47,7 @@
   <!-- Header -->
   <header class="bg-white shadow-lg p-4 flex justify-between items-center sticky top-0 z-50">
     <h1 class="text-2xl font-bold text-blue-600">📘 Health Policy Guidelines</h1>
+    <button onclick="downloadPDF()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Download PDF</button>
   </header>
 
   <!-- Hero Section -->
@@ -32,63 +57,119 @@
     <img src="https://cdn-icons-png.flaticon.com/512/4298/4298789.png" alt="Policy Image" class="mx-auto w-40 animate-bounce" />
   </section>
 
-  <!-- Questions and Answers -->
-  <section class="max-w-4xl mx-auto px-4 py-10">
-    <div class="space-y-6">
+  <!-- Questions and Answers (Accordion Style) -->
+  <section class="max-w-4xl mx-auto px-4 py-10 space-y-4">
+    <div class="space-y-4" id="accordion">
 
-      <!-- Question 1 -->
-      <div class="bg-white rounded-2xl shadow-md p-6 question-box" data-aos="fade-up">
-        <h3 class="text-xl font-semibold text-blue-700">🧾 What is a health policy?</h3>
-        <p class="text-gray-700 mt-2">A health policy is an insurance plan that covers medical expenses such as hospitalization, surgery, and treatment due to illnesses or accidents.</p>
+      <!-- Accordion Question Template -->
+      <div class="bg-white rounded-2xl shadow-md p-4 question-box" data-aos="fade-up">
+        <button class="w-full text-left font-semibold text-blue-700 text-lg" onclick="toggleAnswer(this)">🧾 What is a health policy?</button>
+        <div class="accordion-content mt-2 text-gray-700">
+          A health policy is an insurance plan that covers medical expenses such as hospitalization, surgery, and treatment due to illnesses or accidents.
+        </div>
       </div>
 
-      <!-- Question 2 -->
-      <div class="bg-white rounded-2xl shadow-md p-6 question-box" data-aos="fade-up" data-aos-delay="100">
-        <h3 class="text-xl font-semibold text-blue-700">👨‍👩‍👧 Who needs a health policy?</h3>
-        <p class="text-gray-700 mt-2">Everyone, regardless of age or profession, should have a health policy. It ensures financial security during medical emergencies.</p>
+      <div class="bg-white rounded-2xl shadow-md p-4 question-box" data-aos="fade-up">
+        <button class="w-full text-left font-semibold text-blue-700 text-lg" onclick="toggleAnswer(this)">👨‍👩‍👧 Who needs a health policy?</button>
+        <div class="accordion-content mt-2 text-gray-700">
+          Everyone, regardless of age or profession, should have a health policy. It ensures financial security during medical emergencies.
+        </div>
       </div>
 
-      <!-- Question 3 -->
-      <div class="bg-white rounded-2xl shadow-md p-6 question-box" data-aos="fade-up" data-aos-delay="200">
-        <h3 class="text-xl font-semibold text-blue-700">🌟 What are the advantages?</h3>
-        <ul class="list-disc ml-6 text-gray-700 mt-2">
-          <li>Cashless hospitalization</li>
-          <li>Tax benefits under Section 80D</li>
-          <li>Coverage for critical illnesses</li>
-          <li>Peace of mind for your family</li>
+      <div class="bg-white rounded-2xl shadow-md p-4 question-box" data-aos="fade-up">
+        <button class="w-full text-left font-semibold text-blue-700 text-lg" onclick="toggleAnswer(this)">🌟 What are the advantages?</button>
+        <div class="accordion-content mt-2 text-gray-700">
+          <ul class="list-disc ml-5">
+            <li>Cashless hospitalization</li>
+            <li>Tax benefits under Section 80D</li>
+            <li>Coverage for critical illnesses</li>
+            <li>Peace of mind for your family</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4 question-box" data-aos="fade-up">
+        <button class="w-full text-left font-semibold text-blue-700 text-lg" onclick="toggleAnswer(this)">📋 What documents are required?</button>
+        <div class="accordion-content mt-2 text-gray-700">
+          ID proof, age proof, address proof, medical reports (if any), and passport-sized photos are usually needed.
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4 question-box" data-aos="fade-up">
+        <button class="w-full text-left font-semibold text-blue-700 text-lg" onclick="toggleAnswer(this)">💡 Tips before buying a policy</button>
+        <div class="accordion-content mt-2 text-gray-700">
+          <ul class="list-disc ml-5">
+            <li>Compare different insurers</li>
+            <li>Check hospital network coverage</li>
+            <li>Read policy terms carefully</li>
+            <li>Prefer lifelong renewability</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4 question-box" data-aos="fade-up">
+        <button class="w-full text-left font-semibold text-blue-700 text-lg" onclick="toggleAnswer(this)">🤔 Why should I buy a health policy?</button>
+        <div class="accordion-content mt-2 text-gray-700">
+          It provides protection from sudden medical costs, ensures access to quality healthcare, and offers tax benefits.
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4 question-box" data-aos="fade-up">
+        <button class="w-full text-left font-semibold text-blue-700 text-lg" onclick="toggleAnswer(this)">🧑‍⚖️ Who can claim a policy?</button>
+        <div class="accordion-content mt-2 text-gray-700">
+          The insured person or their family nominee can claim the benefits for eligible expenses as per the policy terms.
+        </div>
+      </div>
+
+      <!-- Help Line -->
+      <div class="bg-blue-50 rounded-2xl shadow-md p-4 question-box border border-blue-300" data-aos="fade-up">
+        <h3 class="text-xl font-semibold text-blue-800">📞 Need Help? Contact Our Support</h3>
+        <ul class="text-gray-700 mt-2 space-y-1">
+          <li><strong>Phone:</strong> +91 98765 43210</li>
+          <li><strong>Email:</strong> support@techetitancpolicy.com</li>
+          <li><strong>Hours:</strong> 9 AM – 9 PM (Mon–Sat)</li>
         </ul>
-      </div>
-
-      <!-- Question 4 -->
-      <div class="bg-white rounded-2xl shadow-md p-6 question-box" data-aos="fade-up" data-aos-delay="300">
-        <h3 class="text-xl font-semibold text-blue-700">📋 What documents are required?</h3>
-        <p class="text-gray-700 mt-2">You typically need ID proof, age proof, address proof, medical reports (if any), and passport-sized photos.</p>
-      </div>
-
-      <!-- Question 5 -->
-      <div class="bg-white rounded-2xl shadow-md p-6 question-box" data-aos="fade-up" data-aos-delay="400">
-        <h3 class="text-xl font-semibold text-blue-700">💡 Tips before buying a policy</h3>
-        <ul class="list-disc ml-6 text-gray-700 mt-2">
-          <li>Compare plans from different insurers</li>
-          <li>Check hospital network coverage</li>
-          <li>Read the policy terms carefully</li>
-          <li>Opt for a policy with lifelong renewability</li>
-        </ul>
+        <button id="openChatBtn" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">💬 Talk to Expert</button>
       </div>
 
     </div>
   </section>
+
+  <!-- Chat Box -->
+  <div id="chatBox" class="flex p-4">
+    <div class="flex justify-between items-center mb-2">
+      <h4 class="text-blue-700 font-bold text-lg">Live Chat</h4>
+      <button onclick="closeChat()" class="text-red-500 text-sm font-semibold">✖</button>
+    </div>
+    <textarea class="w-full border p-2 rounded mb-2 resize-none" rows="4" placeholder="Type your question..."></textarea>
+    <button class="bg-green-600 text-white w-full py-2 rounded hover:bg-green-700">Send</button>
+  </div>
 
   <!-- Footer -->
   <footer class="text-center py-6 bg-white mt-10 shadow-inner">
     <p class="text-sm text-gray-600">© 2025 Techetitanc Policy. All rights reserved.</p>
   </footer>
 
+  <!-- Scripts -->
   <script>
-    AOS.init({
-      duration: 800,
-      once: true
+    AOS.init({ duration: 800, once: true });
+
+    function toggleAnswer(btn) {
+      const content = btn.nextElementSibling;
+      content.classList.toggle('active');
+    }
+
+    function closeChat() {
+      document.getElementById('chatBox').style.display = 'none';
+    }
+
+    document.getElementById('openChatBtn').addEventListener('click', () => {
+      document.getElementById('chatBox').style.display = 'flex';
     });
+
+    function downloadPDF() {
+      alert("PDF download coming soon! (You can implement this using jsPDF or print to PDF.)");
+    }
   </script>
 </body>
 </html>

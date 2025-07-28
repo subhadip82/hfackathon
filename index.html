@@ -8,50 +8,60 @@
   <link rel="stylesheet" href="home.css" />
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
-
-<header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+<!-- navbar -->
+<header class="bg-blue-100 shadow-md fixed top-0 left-0 right-0 z-50">
   <div class="max-w-7xl mx-auto flex justify-between items-center p-4 md:p-6">
-     <button id="mobileMenuBtn"
+    <button id="mobileMenuBtn"
       class="md:hidden flex flex-col justify-center items-center w-10 h-10 p-2 focus:outline-none">
       <span class="block w-6 h-0.5 bg-black mb-1"></span>
       <span class="block w-6 h-0.5 bg-black mb-1"></span>
       <span class="block w-6 h-0.5 bg-black"></span>
     </button>
-    <a href="#" class="flex items-center space-x-2 text-blue-700 font-extrabold text-2xl select-none">
-    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-600">
-      <img src="https://static.vecteezy.com/system/resources/previews/023/654/784/non_2x/golden-logo-template-free-png.png"
-        alt="Company Logo" class="w-full h-full object-cover" />
-    </div>
+    <a href="#" class="flex items-center space-x-2 text-blue-800 font-extrabold text-2xl select-none">
+      <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-400">
+        <img src="https://static.vecteezy.com/system/resources/previews/023/654/784/non_2x/golden-logo-template-free-png.png"
+          alt="Company Logo" class="w-full h-full object-cover" />
+      </div>
       <span>Tech Taitens</span>
     </a>
+
 <!--  desktop  -->
-    <nav class="hidden md:flex items-center space-x-4">
-      <button id="talkExpertBtn" aria-label="Talk to Expert" class="flex items-center space-x-2 border border-blue-600 text-blue-600 rounded-md py-2 px-4 hover:bg-blue-600 hover:text-white transition-colors duration-300 focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v9l-4-4H7a2 2 0 01-2-2V6a2 2 0 012-2h6" /></svg>
+     <nav class="hidden md:flex items-center space-x-4">
+      <button id="talkExpertBtn" aria-label="Talk to Expert"
+        class="flex items-center space-x-2 border border-blue-600 text-blue-600 rounded-md py-2 px-4 hover:bg-blue-600 hover:text-white transition-colors duration-300 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M17 8h2a2 2 0 012 2v9l-4-4H7a2 2 0 01-2-2V6a2 2 0 012-2h6" />
+        </svg>
         <span>Talk to Expert</span>
       </button>
-      <button id="loginBtn" class="border border-blue-600 text-blue-600 rounded-md py-2 px-4 hover:bg-blue-600 hover:text-white transition-colors duration-300 focus:outline-none">Sign In</button>
-      <img id="profileImg" class="profile-img hidden cursor-pointer" src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73f41455-8bf7-45c8-af05-bc99a25f823f.png" alt="User profile picture" tabindex="0" />
+      <button id="loginBtn"
+        class="border border-blue-600 text-blue-600 rounded-md py-2 px-4 hover:bg-blue-600 hover:text-white transition-colors duration-300 focus:outline-none">Sign
+        In</button>
+      <img id="profileImg" class="profile-img hidden cursor-pointer"
+        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73f41455-8bf7-45c8-af05-bc99a25f823f.png"
+        alt="User profile picture" tabindex="0" />
     </nav>
-
   </div>
 
 <!--  Mobile Menu -->
-<div id="mobileMenu" class="md:hidden hidden absolute top-16 right-4 bg-white border border-gray-200 rounded-lg shadow-lg w-56 z-50 px-4 py-4 space-y-3">
-  <button id="mobileLoginBtn" class="w-full border border-blue-600 text-blue-600 rounded-md py-2 px-4 hover:bg-blue-600 hover:text-white transition duration-300">
-    Sign In
-  </button>
+ <div id="mobileMenu"
+    class="md:hidden hidden absolute top-16 right-4 bg-white border border-gray-200 rounded-lg shadow-lg w-56 z-50 px-4 py-4 space-y-3">
+    <button id="mobileLoginBtn"
+      class="w-full border border-blue-600 text-blue-600 rounded-md py-2 px-4 hover:bg-blue-600 hover:text-white transition duration-300">
+      Sign In
+    </button>
 
-  <button id="mobileTalkBtn" class="w-full border border-green-600 text-green-600 rounded-md py-2 px-4 hover:bg-green-600 hover:text-white transition duration-300">
-    Talk to Expert
-  </button>
+    <button id="mobileTalkBtn"
+      class="w-full border border-green-600 text-green-600 rounded-md py-2 px-4 hover:bg-green-600 hover:text-white transition duration-300">
+      Talk to Expert
+    </button>
 
-  <img id="mobileProfileImg" class="w-10 h-10 rounded-full hidden mx-auto mt-2"
-    src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9cc49e9a-d90d-4844-8f76-27cd43a80ac9.png"
-    alt="User profile picture" tabindex="0" />
-</div>
-
-
+    <img id="mobileProfileImg" class="w-10 h-10 rounded-full hidden mx-auto mt-2"
+      src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9cc49e9a-d90d-4844-8f76-27cd43a80ac9.png"
+      alt="User profile picture" tabindex="0" />
+  </div>
 </header>
 
 <main class="flex-grow pt-20">
@@ -114,23 +124,23 @@
 
 </main>
 
-<footer class="bg-white border-t border-gray-300 py-8 mt-auto">
-  <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-gray-600 text-sm">
+<footer class="bg-blue-900 text-white border-t border-blue-700 py-8 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
     <div>
-      <h4 class="font-semibold text-blue-800 mb-2">Policy App</h4>
+      <h4 class="font-semibold text-white mb-2">Policy App</h4>
       <p>Your trusted partner for insurance solutions, helping you secure your future with ease and confidence.</p>
     </div>
     <div>
-      <h4 class="font-semibold text-blue-800 mb-2">Quick Links</h4>
+      <h4 class="font-semibold text-white mb-2">Quick Links</h4>
       <ul>
-        <li><a href="/about" class="hover:underline focus:underline">About Us</a></li>
-        <li><a href="/contact" class="hover:underline focus:underline">Contact</a></li>
-        <li><a href="/terms" class="hover:underline focus:underline">Terms of Service</a></li>
-        <li><a href="/privacy" class="hover:underline focus:underline">Privacy Policy</a></li>
+        <li><a href="/about" class="hover:underline focus:underline text-blue-200">About Us</a></li>
+        <li><a href="/contact" class="hover:underline focus:underline text-blue-200">Contact</a></li>
+        <li><a href="/terms" class="hover:underline focus:underline text-blue-200">Terms of Service</a></li>
+        <li><a href="/privacy" class="hover:underline focus:underline text-blue-200">Privacy Policy</a></li>
       </ul>
     </div>
     <div>
-      <h4 class="font-semibold text-blue-800 mb-2">Connect with Us</h4>
+      <h4 class="font-semibold text-white mb-2">Connect with Us</h4>
       <p>Email: support@policyapp.com</p>
       <p>Phone: +1 (800) 123-4567</p>
       <p>© 2024 Policy App, Inc. All rights reserved.</p>
