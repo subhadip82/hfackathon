@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Claim policy</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <style>
     body {
       min-height: 100vh;
@@ -38,6 +39,48 @@
     .card {
       transition: all 0.5s ease-in-out;
     }
+
+    .scale-in {
+      animation: scaleIn 0.6s ease-out forwards;
+      transform: scale(0.8);
+      opacity: 0;
+    }
+
+    @keyframes scaleIn {
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Popup */
+    .animate-scaleUp {
+      animation: scaleUp 0.6s ease-out;
+    }
+
+    @keyframes scaleUp {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .confetti::before, .confetti::after {
+      content: "✨🎉🎊";
+      font-size: 2rem;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      animation: floatConfetti 2s ease infinite alternate;
+    }
+
+    .confetti::after {
+      top: 20px;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes floatConfetti {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-20px); opacity: 0.6; }
+    }
   </style>
 </head>
 <body class="flex items-center justify-center py-12 px-4">
@@ -68,7 +111,7 @@
     </form>
 
     <!-- Claim Review Box -->
-    <div id="claimDetails" class="hidden glass p-6 rounded-3xl shadow-2xl fade-slide card">
+    <div id="claimDetails" class="hidden glass p-6 rounded-3xl shadow-2xl fade-slide card scale-in">
       <div class="flex items-center gap-4 mb-4">
         <img src="https://cdn-icons-png.flaticon.com/512/3500/3500833.png" class="w-14 h-14" />
         <div>
@@ -91,10 +134,23 @@
 
   </div>
 
+  <!-- Claim Success Popup -->
+  <div id="successPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-3xl p-8 text-center animate-scaleUp shadow-2xl relative">
+      <h2 class="text-2xl font-bold text-green-700 mb-2">🎉 Claim Approved!</h2>
+      <p class="text-gray-600 mb-4">Your claim has been processed successfully.</p>
+      <div class="confetti absolute inset-0 pointer-events-none"></div>
+    </div>
+  </div>
+
   <!-- JS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
+    AOS.init({ duration: 1000, once: true });
+
     const form = document.getElementById('claimForm');
     const resultBox = document.getElementById('claimDetails');
+    const popup = document.getElementById('successPopup');
 
     const policyNames = [
       "SecureLife Plan", "Smart Health Shield", "Future Protect Plus",
@@ -105,13 +161,11 @@
     function getRandomPolicyName() {
       return policyNames[Math.floor(Math.random() * policyNames.length)];
     }
-  // here llm model are add 
+
     function getRandomPolicyNumber() {
       return "POL" + Math.floor(Math.random() * 900000 + 100000);
     }
 
-
-    // llm  mode are add here 
     function getRandomAmount() {
       return Math.floor(Math.random() * 50000 + 10000); // ₹10,000 – ₹60,000
     }
@@ -126,15 +180,12 @@
       const phone = document.getElementById('phone').value;
       const address = document.getElementById('address').value;
 
-      // Generate AI-based data
       const policyName = getRandomPolicyName();
       const policyNumber = getRandomPolicyNumber();
       const claimAmount = getRandomAmount();
 
-      // Hide form
       form.style.display = "none";
 
-      // Fill result box
       document.getElementById('resName').textContent = name;
       document.getElementById('resDOB').textContent = dob;
       document.getElementById('resEmail').textContent = email;
@@ -144,13 +195,19 @@
       document.getElementById('resPolicyName').textContent = policyName;
       document.getElementById('resClaimAmount').textContent = claimAmount;
 
-      // Show result
       resultBox.classList.remove('hidden');
 
-      // Simulate LLM AI processing
+      // Simulate AI processing
       setTimeout(() => {
-        document.getElementById('resStatus').textContent = `✅ Approved — ₹${claimAmount} will be credited soon.`;
-        document.getElementById('resStatus').classList.replace('text-yellow-700', 'text-green-700');
+        const status = document.getElementById('resStatus');
+        status.textContent = `✅ Approved — ₹${claimAmount} will be credited soon.`;
+        status.classList.replace('text-yellow-700', 'text-green-700');
+
+        // Show popup
+        popup.classList.remove('hidden');
+        setTimeout(() => {
+          popup.classList.add('hidden');
+        }, 4500);
       }, 6000);
     });
   </script>
