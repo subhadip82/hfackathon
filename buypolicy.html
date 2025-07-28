@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy Health Policy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .btn-style {
+        @apply mt-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition duration-300;
+      }
+      .btn-cancel {
+        @apply px-4 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition;
+      }
+    }
+    body {
+      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+      font-family: 'Segoe UI', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start p-4">
+
+  <h1 class="text-3xl font-bold mb-6 text-center text-green-700">Choose Your Health Policy</h1>
+
+  <div id="policySection" class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl"></div>
+
+  <div id="formSection" class="hidden w-full max-w-md bg-white p-6 rounded-xl shadow-xl mt-6">
+    <img id="selectedPolicyImage" class="w-full h-40 object-cover rounded-md mb-4" />
+    <p id="selectedPolicyPrice" class="text-xl font-bold text-green-700 mb-4"></p>
+    <form id="buyPolicyForm" class="space-y-4">
+      <input type="text" placeholder="Full Name" required class="w-full p-2 border rounded" />
+      <input type="text" placeholder="Address" required class="w-full p-2 border rounded" />
+      <input type="date" placeholder="Date of Birth" required class="w-full p-2 border rounded" />
+      <input type="tel" placeholder="Phone Number" required class="w-full p-2 border rounded" />
+      <input type="email" placeholder="Email ID" required class="w-full p-2 border rounded" />
+      <select required class="w-full p-2 border rounded">
+        <option value="">Select Policy Duration</option>
+        <option value="1 year">1 Year</option>
+        <option value="2 years">2 Years</option>
+        <option value="3 years">3 Years</option>
+      </select>
+      <div class="flex justify-between">
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Buy Now</button>
+        <button type="button" onclick="goBack()" class="btn-cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="confirmationSection" class="hidden w-full max-w-md text-center bg-white p-6 mt-6 rounded-xl shadow-xl animate__animated animate__fadeIn">
+    <img id="confirmedPolicyImage" class="w-full h-40 object-cover rounded-md mb-4" />
+    <h2 class="text-xl font-bold text-green-800">✅ Successfully Purchased!</h2>
+    <p class="text-sm mt-2 text-gray-700">Further policy information has been sent to your email.</p>
+    <button onclick="goBack()" class="btn-style">Back to Home</button>
+  </div>
+
+  <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <script>
+    const policies = [
+      { name: "Health Shield Plus", price: "₹6,999 / year", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcIbKTuX-peAGLkNlFZmW7w7MbuyJwLwJquA&s" },
+      { name: "Family Health Cover", price: "₹11,499 / year", img: "https://www.squareinsurance.in/_next/image?url=https%3A%2F%2Fsquare-web-new.s3.ap-south-1.amazonaws.com%2FWebsiteSection%2FBlogs%2FHealth%20Insurance%2FHealth%20Insurance1706506308Main-Menu.webp&w=1920&q=75" },
+      { name: "SecureMed Basic", price: "₹4,999 / year", img: "https://securemed.com.au/wp-content/uploads/2016/12/contact-tablet.png.webp" },
+      { name: "WellCare Protect", price: "₹8,999 / year", img: "https://www.taxscan.in/wp-content/uploads/2024/02/Health-Insurance-Policy-Family-Health-Insurance-Best-Family-Health-Insurance-Policy-Family-Health-Insurance-benefits-TAXSCAN.jpg" },
+      { name: "LifeSafe Policy", price: "₹12,999 / year", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5gJHZNrO3BKRMVxjMC_5Pu9b0HjWK40t4L9CuYFFaB1ejngl2J3nF53rz5KFvjyxJReo&usqp=CAU" },
+      { name: "MediAssist Gold", price: "₹7,499 / year", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYhNVILqv7JpA9nvucxQysI9AFn5DXkl5NAOCyeulVGDF-Qchs0IQxIY3gO3at58K-RH0&usqp=CAU" },
+      { name: "Total Health Secure", price: "₹10,999 / year", img: "https://www.nagpurtoday.in/wp-content/uploads/2023/12/health-insurance-concept-idea-security-protection-property-life-from-damage-healthcare-medical-service-isolated-flat-vector-illustration_613284-628-600x400.jpg" },
+      { name: "HappyHealth Plan", price: "₹5,999 / year", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRofTK4jrcGfvxXKgMCpf8jKGzux4M-gNX1zQ&s" },
+      { name: "EverWell Insurance", price: "₹13,499 / year", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0KeYKjfdKhaXAaL7rpW7OBWPC1e2wGe67Dg&s" },
+      { name: "CarePlus Family", price: "₹9,499 / year", img: "https://www.icicilombard.com/docs/default-source/assets/freshlook/images/kids_hi_policy.png" },
+    ];
+
+    const policySection = document.getElementById('policySection');
+    const formSection = document.getElementById('formSection');
+    const confirmationSection = document.getElementById('confirmationSection');
+    const buyForm = document.getElementById('buyPolicyForm');
+    const selectedImage = document.getElementById('selectedPolicyImage');
+    const selectedPrice = document.getElementById('selectedPolicyPrice');
+    const confirmedImage = document.getElementById('confirmedPolicyImage');
+
+    policies.forEach(policy => {
+      const card = document.createElement("div");
+      card.className = "cursor-pointer bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 card-hover";
+      card.setAttribute("data-aos", "zoom-in");
+      card.setAttribute("data-aos-duration", "800");
+      card.innerHTML = `
+        <img src="${policy.img}" alt="${policy.name}" class="w-full h-40 object-cover rounded mb-2">
+        <h3 class="text-lg font-bold text-gray-700">${policy.name}</h3>
+        <p class="text-green-600">${policy.price}</p>
+        <button class="mt-3 w-full bg-green-500 text-white py-1 rounded hover:bg-green-600 transition">Buy Policy</button>
+      `;
+      card.querySelector("button").addEventListener("click", () => {
+        formSection.classList.remove("hidden");
+        policySection.classList.add("hidden");
+        selectedImage.src = policy.img;
+        selectedPrice.innerText = policy.price;
+        confirmedImage.src = policy.img;
+      });
+      policySection.appendChild(card);
+    });
+
+    buyForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      formSection.classList.add("hidden");
+      confirmationSection.classList.remove("hidden");
+      triggerConfetti();
+    });
+
+    function goBack() {
+      formSection.classList.add("hidden");
+      confirmationSection.classList.add("hidden");
+      policySection.classList.remove("hidden");
+    }
+
+    function triggerConfetti() {
+      const duration = 3 * 1000;
+      const animationEnd = Date.now() + duration;
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(() => {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) return clearInterval(interval);
+
+        const particleCount = 50 * (timeLeft / duration);
+        confetti({
+          particleCount,
+          angle: randomInRange(55, 125),
+          spread: randomInRange(50, 100),
+          origin: { x: Math.random(), y: Math.random() - 0.2 },
+          colors: ['#00C9A7', '#F8C471', '#A569BD', '#F5B7B1']
+        });
+      }, 250);
+    }
+  </script>
+</body>
+</html>
