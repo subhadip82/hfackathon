@@ -1,0 +1,25 @@
+# Core LLM tools
+langchain==0.1.16
+langchain_community
+langchain_openai
+sentence-transformers==2.2.2
+
+# PDF loading
+PyMuPDF
+PyPDF2
+
+# Embeddings + Vector DB
+faiss-cpu==1.7.4
+chromadb
+
+# Environment variable loader
+python-dotenv
+
+# Web UI
+streamlit
+
+# Optional - for Flask API version
+Flask
+
+# Optional utilities
+tqdm
